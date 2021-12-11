@@ -1,7 +1,6 @@
 <?php
- include('conn.php');
+ $conn = mysqli_connect("35.239.10.220", "root", "password123");
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">

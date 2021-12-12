@@ -25,7 +25,7 @@
         <div class = 'search-container'>
             <div class="search-box">
                 <button type= "submit" name = "submit" class="btn-search"><i class="fas fa-search"></i></button>
-                <input type="text" class="input-search" placeholder="" name='movie_name'>
+                <input type="text" class="input-search" placeholder="Enter a movie" name='movie_name'>
             </div>		
             <div class = 'dropdown-filter'>
                 <i class = 'fas fa-list'></i>
@@ -226,28 +226,7 @@
             ";
         }
     }
-    
-    if(isset($_GET["report"])) 	
-    { 
-      $movie_name = $_GET["movie_name"];
-      $where = sprintf("name = '%s'", $movie_name);
-      $stmt = $conn->prepare("INSERT IGNORE INTO reported_movies (movie_id) VALUES (?)");
-	  $stmt->bind_param("i", $report_id);
-	  $que = 'select movie_id from movies where ' . $where;
-      $res = mysqli_query($conn, $que);
-      if (mysqli_num_rows($res) != 0){
-        $row = mysqli_fetch_array($res);
-        $report_id = $row['movie_id'];
-        $stmt->execute();
-      }
-      for ($x = 0; $x <= 3; $x++) {
-        echo "<br>";
-       }
-       $query = 'select * from movies Natural Join box_office Natural Join parental_advisory NATURAL JOIN avg_rating order by rand() limit 1';
-       $res = mysqli_query($conn, $query);
-       $row = mysqli_fetch_array($res);
-       display($row, 0);
-    }
+
     if(isset($_GET["submit"]))
     {
         $head = 'select * from';
@@ -338,6 +317,29 @@
             }
         }
     }
+
+    elseif(isset($_GET["report"])) 	
+    { 
+      $movie_name = $_GET["movie_name"];
+      $where = sprintf("name = '%s'", $movie_name);
+      $stmt = $conn->prepare("INSERT IGNORE INTO reported_movies (movie_id) VALUES (?)");
+	  $stmt->bind_param("i", $report_id);
+	  $que = 'select movie_id from movies where ' . $where;
+      $res = mysqli_query($conn, $que);
+      if (mysqli_num_rows($res) != 0){
+        $row = mysqli_fetch_array($res);
+        $report_id = $row['movie_id'];
+        $stmt->execute();
+      }
+      for ($x = 0; $x <= 3; $x++) {
+        echo "<br>";
+       }
+       $query = 'select * from movies Natural Join box_office Natural Join parental_advisory NATURAL JOIN avg_rating order by rand() limit 1';
+       $res = mysqli_query($conn, $query);
+       $row = mysqli_fetch_array($res);
+       display($row, 0);
+    }
+    
     else {
         for ($x = 0; $x <= 3; $x++) {
             echo "<br>";
@@ -347,6 +349,8 @@
         $row = mysqli_fetch_array($res);
         display($row, 0);
     }
+
+    
 ?>
 
 </body>

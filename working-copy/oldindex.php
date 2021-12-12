@@ -1,14 +1,15 @@
 <?php
- $conn = mysqli_connect("35.239.10.220", "root", "password123");
+    $conn = mysqli_connect("35.239.10.220", "root", "password123", "348project4");
 ?>
 
+<!-- /Users/lucas/Downloads/google-cloud-sdk/bin/gcloud -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/stylesheets/styles.css" type="text/css">
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/cs/font-awesome.min.css" rel="stylesheet">
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet" type='text/css'><title>The Critics</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -296,6 +297,9 @@
         if (mysqli_num_rows($res) == 0){
             $query = 'select * from movies Natural Join box_office Natural Join parental_advisory NATURAL JOIN avg_rating order by rand() limit 1'; //left outer join
             $res = mysqli_query($conn, $query);
+            if (!$res) {
+                echo "NOT RESULT";
+            }
             $row = mysqli_fetch_array($res);
             display($row, 1);
         }
@@ -315,6 +319,9 @@
         }
         $query = 'select * from movies Natural Join box_office Natural Join parental_advisory NATURAL JOIN avg_rating order by rand() limit 1';
         $res = mysqli_query($conn, $query);
+        if (!$res) {
+            echo "NOT RESULT";
+        }
         $row = mysqli_fetch_array($res);
         display($row, 0);
     }

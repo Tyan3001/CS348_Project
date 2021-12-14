@@ -347,7 +347,7 @@ DELIMITER ;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`%` SQL SECURITY DEFINER */
-/*!50001 VIEW `avg_rating` AS select `ratings`.`movie_id` AS `movie_id`,avg(`ratings`.`rating`) AS `avg` from `ratings` group by `ratings`.`movie_id` */;
+VIEW `avg_rating` AS select `ratings`.`movie_id` AS `movie_id`,avg(`ratings`.`rating`) AS `avg` from `ratings` group by `ratings`.`movie_id` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
